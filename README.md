@@ -176,11 +176,13 @@ docker ps -a
 ```bash
 #посмотрим сети
 docker network ls
+docker network ls | Select-String "rocketcounter"
+docker ps -a | Select-String "rocketcounter|redis"
 ```
 
 ![link.png](link.png)
 
-Тут тоже только старые. Очистка выполнена.
+Тут тоже только старые, а при вызове еще двух команд, видим отсутствие именно созданной сетью Compose конфигурации после `down -v`. Очистка выполнена.
 
 ## Вопросы
 
