@@ -4,10 +4,10 @@
 https://hub.docker.com/r/naadin/image-lab/tags
 
 ## Размер образа
-![size.png](size.png)
+![imgs02/size.png](imgs02/size.png)
 
 ## История
-![history1.png](history1.png)
+![imgs02/history1.png](imgs02/history1.png)
 
 ## Вывод
 Благодаря использованию образа `python:3.12-alpine`, размер итогового образа составил 99.5Мб. Это значительно меньше «наивной» сборки на базе полного `python:3.12`. 
@@ -16,18 +16,18 @@ https://hub.docker.com/r/naadin/image-lab/tags
 
 Контейнер успешно работает в режиме `--read-only` (флаг `--tmpfs /tmp` добавляет временную директорию в оперативную память).
 
-![run.png](run.png)
+![imgs02/run.png](imgs02/run.png)
 
 Работа контейнера с `--read-only` обеспечивается дополнительным монтированием `--tmpfs /tmp`. Проверим возможность запуска с одним `--read-only`, например с использованием `--worker-tmp-dir/dev/shm`.
 
-![read.png](read.png)
+![imgs02/read.png](imgs02/read.png)
 
 Тут тоже все работает корректно.
 
 Конфигурация передается через переменные окружения и `build-args`, поэтому для изменения поведения приложения не требуется пересборка образа:
 
-![big.png](big.png)
+![imgs02/big.png](imgs02/big.png)
 
 Использование Gunicorn вместо встроенного сервера Flask обеспечивает корректное и быстрое завершение по сигналу SIGTERM:
 
-![stop.png](stop.png)
+![imgs02/stop.png](imgs02/stop.png)
