@@ -7,7 +7,7 @@
 docker run -d --name redis redis
 ```
 
-![run_redis.png](run_redis.png)
+![imgs03/run_redis.png](imgs03/run_redis.png)
 
 Контейнер создан в фоновом режиме с именем `redis`. Образ `redis:latest` был автоматически скачан из Docker Hub.
 
@@ -16,7 +16,7 @@ docker run -d --name redis redis
 docker ps
 ```
 
-![see_redis.png](see_redis.png)
+![imgs03/see_redis.png](imgs03/see_redis.png)
 
 Контейнер `redis` в статусе `Up`, слушает порт `6379/tcp`.
 
@@ -25,7 +25,7 @@ docker ps
 docker run -d --name rocketcounter --link redis:redis -p 8085:5000 rotorocloud/rocket-counter
 ```
 
-![run_rocketcounter.png](run_rocketcounter.png)
+![imgs03/run_rocketcounter.png](imgs03/run_rocketcounter.png)
 
 Создаем приложение из образа `rotorocloud/rocket-counter`, связываем его с `Redis` через `--link` и публикуем на порту `8085`. Флаг `--link redis:redis` связывает контейнер `rocketcounter` с контейнером `redis`.
 
@@ -34,21 +34,21 @@ docker run -d --name rocketcounter --link redis:redis -p 8085:5000 rotorocloud/r
 docker ps
 ```
 
-![see_two.png](see_two.png)
+![imgs03/see_two.png](imgs03/see_two.png)
 
 `--link` исторически устарел. В этой части используем его намеренно, чтобы увидеть ручную связку. В Compose он не нужен.
 
 Проверим, что приложение отдаёт HTML-страницу: 
 
-![see_curl.png](see_curl.png)
+![imgs03/see_curl.png](imgs03/see_curl.png)
 
 Откроем ее на `localhost`:
 
-![get_1.png](get_1.png)
+![imgs03/get_1.png](imgs03/get_1.png)
 
 Понажимаем на кнопку `GET A ROCKET` и убедимся, что счетчик работает:
 
-![get_2.png](get_2.png)
+![imgs03/get_2.png](imgs03/get_2.png)
 
 Счётчик растёт, значит приложение успешно работает и сохраняет данные в `Redis`.
 
@@ -61,7 +61,7 @@ docker rm rocketcounter redis
 docker ps -a
 ```
 
-![stop.png](stop.png)
+![imgs03/stop.png](imgs03/stop.png)
 
 Остались только старые контейнеры - все оки.
 
@@ -74,7 +74,7 @@ mkdir rocketcounter
 cd rocketcounter
 ```
 
-![make.png](make.png)
+![imgs03/make.png](imgs03/make.png)
 
 Создадим в ней файл:
 
@@ -84,7 +84,7 @@ notepad docker-compose.yml
 
 Запишем туда текст:
 
-![file.png](file.png)
+![imgs03/file.png](imgs03/file.png)
 
 Тут мы описали требования для стека. В файле описаны два сервиса: `redis` (база данных) и `rocketcounter` (приложение). Связь между ними обеспечивается автоматически: Compose создаёт общую сеть для проекта. 
 
@@ -93,20 +93,20 @@ notepad docker-compose.yml
 docker compose up -d
 ```
 
-![create.png](create.png)
+![imgs03/create.png](imgs03/create.png)
 
 ```bash
 #проверим
 docker compose ps
 ```
 
-![compose_ps.png](compose_ps.png)
+![imgs03/compose_ps.png](imgs03/compose_ps.png)
 
 Откроем `localhost` и понажимаем на кнопочку `GET A ROCKET`:
 
-![get_1.png](get_1.png)
+![imgs03/get_1.png](imgs03/get_1.png)
 
-![get01.png](get01.png)
+![imgs03/get01.png](imgs03/get01.png)
 
 Счетчик работает, все корректно.
 
@@ -119,7 +119,7 @@ notepad docker-compose.yml
 
 И изменим порт:
 
-![new_port.png](new_port.png)
+![imgs03/new_port.png](imgs03/new_port.png)
 
 Таким образом, хост выберет свободный порт автоматически.
 
@@ -129,26 +129,26 @@ notepad docker-compose.yml
 docker compose up -d --scale rocketcounter=2
 ```
 
-![new_up.png](new_up.png)
+![imgs03/new_up.png](imgs03/new_up.png)
 
 ```bash
 #посмотрим
 docker compose ps
 ```
 
-![new_ps.png](new_ps.png)
+![imgs03/new_ps.png](imgs03/new_ps.png)
 
 Docker автоматически выдал разные свободные порты для двух копий приложения.
 
 Зайдем на `http://localhost:32768` и понажимаем на кнопочку:
 
-![15.png](15.png)
+![imgs03/15.png](imgs03/15.png)
 
 Остановимся на 15.
 
 Затем зайдем на `http://localhost:32769` и увидим, что счетчик начинается как раз с 15:
 
-![16.png](16.png)
+![imgs03/16.png](imgs03/16.png)
 
 Счетчик для них общий (хранится в одном `Redis`). Масштабирование работает.
 
@@ -160,7 +160,7 @@ Docker автоматически выдал разные свободные п�
 docker compose down -v
 ```
 
-![down.png](down.png)
+![imgs03/down.png](imgs03/down.png)
 
 Проверим, что ничего не осталось:
 
@@ -169,7 +169,7 @@ docker compose down -v
 docker ps -a
 ```
 
-![psss.png](psss.png)
+![imgs03/psss.png](imgs03/psss.png)
 
 Пусто, остались только старые контейнеры.
 
@@ -180,7 +180,7 @@ docker network ls | Select-String "rocketcounter"
 docker ps -a | Select-String "rocketcounter|redis"
 ```
 
-![link.png](link.png)
+![imgs03/link.png](imgs03/link.png)
 
 Тут тоже только старые, а при вызове еще двух команд, видим отсутствие созданной сетью Compose конфигурации после `down -v`. Очистка выполнена.
 
