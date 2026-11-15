@@ -17,7 +17,7 @@
 docker version
 ```
 
-![231224.png](231224.png)
+![imgs01/version.png](imgs01/version.png)
 
 * **Запустим выбранный образ в конкретном теге(`nginx:alpine`)**
 
@@ -30,7 +30,7 @@ docker run -d --name test-nginx nginx:alpine
 docker ps
 ```
 
-![231823.png](231823.png)
+![imgs01/run_test.png](imgs01/run_test.png)
 
 [Запуск конкретного тега](https://github.com/tiranousor/os-modern-docker-course/blob/main/4-course/docker-and-containers/lectures/02_commands.md)
 
@@ -42,8 +42,8 @@ docker ps
 #запуск на порту 8080
 docker run -d --name lab-web-naadin -p 8080:80 nginx:alpine
 ```
-![233524.png](233524.png)
-![233422.png](233422.png)
+![imgs01/welcom1.png](imgs01/welcom1.png)
+![imgs01/run_-d.png](imgs01/run_-d.png)
 
 * Затем перезапуск на порту 1111
 
@@ -53,8 +53,8 @@ docker run -d --name lab-web-naadin -p 1111:80 nginx:alpine
 #отобразим работающие контейнеры
 docker ps
 ```
-![234249.png](234249.png)
-![234926.png](234926.png)
+![imgs01/welcom2.png](imgs01/welcom2.png)
+![imgs01/run_-d1png](imgs01/run_-d1png)
 
 * `test-nginx` нужен был нам для того, чтобы убедиться, что образ `nginx:alpine` запускается, поэтому, в дальнейшем он нам не понадобиться, можем удалять
 
@@ -64,7 +64,7 @@ docker stop test-nginx
 #удаление остановленного контейнера
 docker rm test-nginx
 ```
-![234938.png](234938.png)
+![imgs01/stop_rm.png](imgs01/stop_rm.png)
 
 [Проброс портов](https://github.com/tiranousor/os-modern-docker-course/blob/main/4-course/docker-and-containers/lectures/03_docker_run.md#3-%D0%BF%D1%80%D0%BE%D0%B1%D1%80%D0%BE%D1%81-%D0%BF%D0%BE%D1%80%D1%82%D0%BE%D0%B2--p), [именование контейнеров](https://github.com/tiranousor/os-modern-docker-course/blob/main/4-course/docker-and-containers/lectures/03_docker_run.md#4-%D0%B8%D0%BC%D0%B5%D0%BD%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5-%D0%BA%D0%BE%D0%BD%D1%82%D0%B5%D0%B9%D0%BD%D0%B5%D1%80%D0%BE%D0%B2---name)
 
@@ -82,7 +82,7 @@ mkdir site
 docker stop lab-web-naadin
 docker rm lab-web-naadin
 ```
-![083356.png](083356.png)
+![imgs01/mkdir.png](imgs01/mkdir.png)
 
 * Перезапуск `lab-web-naadin`, смонтировав папку как `read‑only`
 ```bash
@@ -90,15 +90,15 @@ docker rm lab-web-naadin
 docker run -d --name lab-web-naadin -p 8080:80 -v "${PWD}\site:/usr/share/nginx/html:ro" nginx:alpine 
 ```
 
-![083001.png](083001.png)
+![imgs01/naadin01.png](imgs01/naadin01.png)
 
 * Редактирование текста
 ```bash
 "anin" | Set-Content .\site\index.html
 ```
 
-![083032.png](083032.png)
-![083426.png](083426.png)
+![imgs01/anin01.png](imgs01/anin01.png)
+![imgs01/set.png](imgs01/set.png)
 
 
 * Почему данные переживут удаление контейнера?
@@ -119,7 +119,7 @@ cd /usr/share/nginx/html
 #просмотр листинга каталога
 ls -la
 ```
-![125144.png](125144.png)
+![imgs01/exec.png](imgs01/exec.png)
 
 ```bash
 #создание файла при :ro
@@ -129,14 +129,14 @@ touch anin.txt
 #получили ошибку, выходим
 exit
 ```
-![125159.png](125159.png)
+![imgs01/html_torch.png](imgs01/html_torch.png)
 
 ```bash
 #останавливаем и удаляем контейнер
 docker stop lab-web-naadin
 docker rm lab-web-naadin
 ```
-![130019.png](130019.png)
+![imgs01/stop01.png](imgs01/stop01.png)
 
 * Пересоздаем контейнер в режиме RW
 ```bash
@@ -158,15 +158,15 @@ ls -la
 #выход
 exit
 ```
-![130030.png](130030.png)
+![imgs01/root.png](imgs01/root.png)
 
 * Файл на хосте после режима RW
 ```bash
 #посмотрим содержимое папки site в текущем каталоге
 dir .\site
 ```
-![130318.png](130318.png)
-![130343.png](130343.png)
+![imgs01/dir.png](imgs01/dir.png)
+![imgs01/anin02.png](imgs01/anin02.png)
 
 [Интерактивный режим](https://github.com/tiranousor/os-modern-docker-course/blob/main/4-course/docker-and-containers/lectures/02_commands.md#%D1%88%D0%B0%D0%B3-3-%D0%B2%D1%8B%D0%BF%D0%BE%D0%BB%D0%BD%D0%B5%D0%BD%D0%B8%D0%B5-%D0%BA%D0%BE%D0%BC%D0%B0%D0%BD%D0%B4%D1%8B-%D0%B2-%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%B0%D1%8E%D1%89%D0%B5%D0%BC-%D0%BA%D0%BE%D0%BD%D1%82%D0%B5%D0%B9%D0%BD%D0%B5%D1%80%D0%B5-docker-exec)
 
@@ -177,19 +177,19 @@ dir .\site
 docker logs --tail 10 lab-web-naadin
 ```
 
-![133521.png](133521.png)
+![imgs01/logs.png](imgs01/logs.png)
 
 ```bash
 #прикрепление к основному процессу контейнера с помощью `attach`
 docker attach lab-web-naadin
 ```
-![133541.png](133541.png)
+![imgs01/attach.png](imgs01/attach.png)
 
 ```bash
 #проверим, что контейнер работает после закрытия `attach`
 docker ps
 ```
-![133552.png](133552.png)
+![imgs01/pss.png](imgs01/pss.png)
 
 `Ctrl + P` + `Ctrl + Q` - отключиться от контейнера, не останавливая его. 
 `Ctrl + C` - остановит контейнер.
@@ -211,7 +211,7 @@ docker run --name naadin nginx:alpine echo "pervaya"
 #вывод статуса контейнера после выполнения
 docker ps -a
 ```
-![135211.png](135211.png)
+![imgs01/pervaya.png](imgs01/pervaya.png)
 
 * Контейнер перешел в состояние `Exited(0)`, так как его единственная команда `echo` выполнилась мгновенно. Docker останавливает контейнер, когда завершается его главный процесс.
 
@@ -220,11 +220,11 @@ docker ps -a
 ### 7) Inspect
 * Вырезка блока `mounts`
 
-![140219.png](140219.png)
+![imgs01/true.png](imgs01/true.png)
 
 * Вырезка блока `ports`
 
-![140252.png](140252.png)
+![imgs01/host.png](imgs01/host.png)
 
 [Инспекция контейнера](https://github.com/tiranousor/os-modern-docker-course/blob/main/4-course/docker-and-containers/lectures/03_docker_run.md#7-%D0%B8%D0%BD%D1%81%D0%BF%D0%B5%D0%BA%D1%86%D0%B8%D1%8F-%D0%BA%D0%BE%D0%BD%D1%82%D0%B5%D0%B9%D0%BD%D0%B5%D1%80%D0%B0-docker-inspect)
 
@@ -246,7 +246,7 @@ docker ps -a
 docker images
 ```
 
-![141140.png](141140.png)
+![imgs01/images.png](imgs01/images.png)
 
 [Удаление контейнеров](https://github.com/tiranousor/os-modern-docker-course/blob/main/4-course/docker-and-containers/lectures/02_commands.md#4-docker-rm), [удаление образов](https://github.com/tiranousor/os-modern-docker-course/blob/main/4-course/docker-and-containers/lectures/02_commands.md#4-docker-rm](https://github.com/tiranousor/os-modern-docker-course/blob/main/4-course/docker-and-containers/lectures/02_commands.md#6-docker-rmi))
 
